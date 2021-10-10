@@ -10,6 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,8 @@ import com.sigapregao.desafio.repositories.ElectronicTradingRepository;
 
 @Service
 public class ElectronicTradingService {
-	private String url = "https://www.comprasnet.gov.br/ConsultaLicitacoes/ConsLicitacao_Filtro.asp?numprp=&dt_publ_ini=01/09/2021&dt_publ_fim=15/09/2021&chkModalidade=5&chk_concor=&chk_pregao=1,2,3,4&chk_rdc=&optTpPesqMat=M&optTpPesqServ=S&chkTodos=&chk_concorTodos=&chk_pregaoTodos=-1&txtlstUf=to&txtlstMunicipio=&txtlstUasg=&txtlstGrpMaterial=&txtlstClasMaterial=&txtlstMaterial=&txtlstGrpServico=&txtlstServico=&txtObjeto=";
+	private String url = "https://www.comprasnet.gov.br/ConsultaLicitacoes/ConsLicitacao_Filtro.asp?numprp=&dt_publ_ini=01/10/2021&dt_publ_fim=15/10/2021&chkModalidade=5&chk_concor=&chk_pregao=1,2,3,4&chk_rdc=&optTpPesqMat=M&optTpPesqServ=S&chkTodos=&chk_concorTodos=&chk_pregaoTodos=-1&txtlstUf=&txtlstMunicipio=&txtlstUasg=&txtlstGrpMaterial=&txtlstClasMaterial=&txtlstMaterial=&txtlstGrpServico=&txtlstServico=&txtObjeto=";
+
 	@Autowired
 	private ElectronicTradingRepository repository;
 
@@ -44,7 +46,6 @@ public class ElectronicTradingService {
 		driver.get(url);
 
 		driver.findElement(By.id("txtObjeto")).sendKeys(search);
-
 		driver.findElement(By.id("ok")).click();
 
 		String htm = driver.getPageSource();

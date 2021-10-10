@@ -9,16 +9,23 @@ $("#formSearch").on("submit", function(e) {
         return;
     }
     document.getElementById("form").value = ""
+        /* teste = () => {
+        if (document.querySelector(".card")) {
+            document.querySelector(".card").replaceChild;
+
+
+        }
+    }*/
 
     $.ajax({
         method: "POST",
         url: "http://localhost:8080/trades/search",
         dataType: "JSON",
         data: data.search
-            //data: JSON.stringify(data.search),
 
 
     }).done((search) => {
+
 
         console.log("executando a função SEARCH")
 
@@ -62,13 +69,18 @@ $("#formSearch").on("submit", function(e) {
     });
 });
 
+const refresh = () => {
+    if (document.querySelector(".card")) {
+
+    }
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 
 const searchHistory = () => {
     event.preventDefault();
 
-    $('#container').load(window.location.reload + " " + '#container');
     $.ajax({
             method: "GET",
             url: "http://localhost:8080/trades",
@@ -78,10 +90,22 @@ const searchHistory = () => {
 
             let load = false
 
+
+            const formatDate = (dt) => {
+                let date = new Date(dt);
+                let day = date.toLocaleDateString();
+                let hours = date.toLocaleTimeString();
+                return day + "  " +
+                    "Hora " + " " +
+                    hours
+
+            }
+
+
             if (!load) {
 
-                for (var i = 0; i < response.content.length; i++) {
 
+                for (var i = 0; i < response.content.length; i++) {
 
                     lista.innerHTML += "<div class= card> " +
                         "<li>" +
@@ -102,15 +126,14 @@ const searchHistory = () => {
                         "</li>" +
 
                         "<li>" +
-                        "<span > Dia e Hora: </span>" + "<span class=searchDate>" +
-                        response.content[i].instant + "</span>" +
-
-
+                        "<span > Data e hora da pesquisa: </span>" + "<span class=searchDate>" +
+                        formatDate(response.content[i].instant) + "</span>" +
                         "</li>"
 
                     "/div"
 
                 }
+
 
             } else lista.innerHTML = "<span>Carregando...</span>"
 

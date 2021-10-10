@@ -24,6 +24,7 @@ body {
     width: 40%;
     display: flex;
     justify-content: space-between;
+    height: 40px;
 }
 
 .nav-container li {
@@ -42,7 +43,7 @@ body {
 }
 
 .main-container {
-    margin-left: 50vh;
+    margin-left: 30%;
     width: 760px;
     padding: 30px;
 }
@@ -56,12 +57,15 @@ li {
 
 .nav-container li:hover {
     text-decoration: underline;
+    cursor: pointer;
+    background-color: #afafaf;
+    border-radius: 5px;
 }
 
 h1 {
     color: #d4a713;
     margin-top: 100px;
-    margin-left: 80vh;
+    margin-left: 45%;
 }
 
 span {
@@ -103,7 +107,7 @@ button {
 }
 
 .searchDate {
-    color: red
+    color: #209117
 }
 
 #loading {
