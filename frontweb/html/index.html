@@ -1,56 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Desafio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="../styles/styles.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-  </head>
-  <nav class="nav"><img src="../assets/logo.png" alt="logo">
-  <div class="nav-container">
-  <li>Funcionalidades</li>
-  <li class="active">Pregões</li>
-  <li>Preços</li>
-  <li>Cursos</li>
-  <li>Blog</li>
-  <li>Entrar</li>
-  <li>Comerçar</li>
-</div>
-  </nav>
-  <body>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<nav class="nav"><img src="../assets/logo.png" alt="logo">
+    <div class="nav-container">
+        <li>Funcionalidades</li>
+        <li class="active">Pregões</li>
+        <li>Preços</li>
+        <li>Cursos</li>
+        <li>Blog</li>
+        <li>Entrar</li>
+        <li>Comerçar</li>
+    </div>
+</nav>
+
+<body>
     <h1>Lista de Pregões</h1>
 
-    <div class="main-container" >
+    <div class="main-container">
 
-      <form onSubmit="handleSubmit()" class="search">
-        <div class="buttons-group">
-          
-          <input
-          name="form"
-          id="form"  
-          type="text"
-          placeholder="Pesquisar produtos"
-          required
-            
-          >
-          <button class="btn" type="submit">Pesquisar</button>
-         
+        <form onSubmit="" id="formSearch">
+            <div class="buttons-group">
+
+                <input name="form" id="form" type="text" placeholder="Pesquisar pregões" required>
+                <button class="btn" type="submit">Pesquisar</button>
+                <button class="btn" type="text" onclick="searchHistory()">Ver histórico</button>
+
         </form>
-        <button class="btn" type="text" onclick="get()">Ver histórico</button>
-        </div>
-      <div class="container" id="content">
-     
-      </div>
-      
-    </div>
-   
 
-    
+        </div>
+
+        <div class="container" id="container">
+
+        </div>
+
+    </div>
+
+
+
 
     <script src="../js/index.js"></script>
-  </body>
+</body>
+
 </html>

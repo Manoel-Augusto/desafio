@@ -1,77 +1,122 @@
-const get = () => {
-  
-  
-  document.ontimeupdate
-  event.preventDefault();
-  var ajax = new XMLHttpRequest();
-
-  ajax.open("GET", "http://localhost:8080/trades");
-  ajax.send();
-
-  ajax.addEventListener("readystatechange", function () {
-    if (ajax.readyState === 4 && ajax.status === 200) {
-      var response = ajax.response;
-      const data = JSON.parse(response);
-      var lista = document.querySelector(".container");
-
-      for (var i = 0; i < response.length; i++) {
-        lista.innerHTML +=
-          "<li class= card>" +
-          "<span>Id:</span>" +
-          data.content[i].id +
-          "</li>";
-        lista.innerHTML +=
-          "<li class= card>" +
-          "<span>Nº do Pregão:</span>" +
-          data.content[i].tradeNumber +
-          "</li>";
-        lista.innerHTML +=
-          "<li class= card>" +
-          "<span>Órgão:</span>" +
-          data.content[i].organ +
-          "</li>";
-        lista.innerHTML +=
-          "<li class= card>" +
-          "<span>Info-Gerais:</span>" +
-          data.content[i].object +
-          "</li>";
-     
-      
-      }
+$("#formSearch").on("submit", function(e) {
+    e.preventDefault();
+    let data = {
+        search: $("#form").val(),
     }
-  });
 
-  var thumb = document.getElementById("content");
+    if (data.search === "") {
+        alert("Preencha o campo de busca!")
+        return;
+    }
+    document.getElementById("form").value = ""
 
-  if (thumb) {
-    /*
- var node = document.getElementById("content");
-if (node.parentNode) {
-  node.parentNode.removeChild(node);
+    $.ajax({
+        method: "POST",
+        url: "http://localhost:8080/trades/search",
+        dataType: "JSON",
+        data: data.search
+            //data: JSON.stringify(data.search),
+
+
+    }).done((search) => {
+
+        console.log("executando a função SEARCH")
+
+        var lista = document.querySelector(".container");
+
+        let load = false
+
+        if (!load) {
+
+            for (var i = 0; i < search.length; i++) {
+
+
+
+
+                lista.innerHTML += "<div class= card> " +
+                    "<li>" +
+                    "<span>Nº do Pregão:</span>" +
+                    search[i].tradeNumber +
+                    "</li>" +
+                    "<li>" +
+                    "<span>Órgão:</span>" +
+                    search[i].organ +
+                    "</li>" +
+                    "<li>" +
+                    "<span>Info-Gerais:</span>" +
+                    search[i].info +
+                    "</li>"
+
+                "/div"
+            }
+
+        } else lista.innerHTML = "<span>Carregando...</span>"
+
+
+
+    }).fail((error) => {
+        console.log("erro na requisição", error);
+    }).always(() => {
+
+        console.log("requisição finalizada");
+    });
+});
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+const searchHistory = () => {
+    event.preventDefault();
+
+    $('#container').load(window.location.reload + " " + '#container');
+    $.ajax({
+            method: "GET",
+            url: "http://localhost:8080/trades",
+            dataType: "JSON"
+        }).done((response) => {
+            var lista = document.querySelector(".container");
+
+            let load = false
+
+            if (!load) {
+
+                for (var i = 0; i < response.content.length; i++) {
+
+
+                    lista.innerHTML += "<div class= card> " +
+                        "<li>" +
+                        "<span>Id:</span>" +
+                        response.content[i].id +
+                        "</li>" +
+                        "<li>" +
+                        "<span>Nº do Pregão:</span>" +
+                        response.content[i].tradeNumber +
+                        "</li>" +
+                        "<li>" +
+                        "<span>Órgão:</span>" +
+                        response.content[i].organ +
+                        "</li>" +
+                        "<li>" +
+                        "<span>Info-Gerais:</span>" +
+                        response.content[i].info +
+                        "</li>" +
+
+                        "<li>" +
+                        "<span > Dia e Hora: </span>" + "<span class=searchDate>" +
+                        response.content[i].instant + "</span>" +
+
+
+                        "</li>"
+
+                    "/div"
+
+                }
+
+            } else lista.innerHTML = "<span>Carregando...</span>"
+
+        })
+        // window.location.reload(true);
+        // window.location.reload()
+        // location.reload()
+
 }
-
-*/
-    console.log("existe");
-  } else console.log("não existe");
-};
-
-function handleSubmit() {
-  event.preventDefault();
-  form = document.getElementById("form").value;
-  document.getElementById("form").value = "";
-  get();
-
-  post();
-}
-
-const post = () => {
-  clean()
-  const request = new XMLHttpRequest();
-  request.open("POST", "http://localhost:8080/trades/search", true);
-  request.setRequestHeader("Content-type", "application/json");
-  request.send(JSON.stringify(form));
-  request.onload = function () {
-    console.log(this.responseText);
-  };
-  return request.responseText;
-};

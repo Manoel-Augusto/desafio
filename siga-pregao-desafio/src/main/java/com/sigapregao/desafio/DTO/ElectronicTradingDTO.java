@@ -13,18 +13,18 @@ public class ElectronicTradingDTO implements Serializable {
 	private String tradeNumber;
 	private String organ;
 	private Instant instant;
-	private String object;
+	private String info;
 
 	public ElectronicTradingDTO() {
 	}
 
-	public ElectronicTradingDTO(Long id, String tradeNumber, String organ, Instant instant, String object,
+	public ElectronicTradingDTO(Long id, String tradeNumber, String organ, Instant instant, String info,
 			String proposalSubmission, String openingProposal) {
 		this.id = id;
 		this.tradeNumber = tradeNumber;
 		this.organ = organ;
 		this.instant = instant;
-		this.object = object;
+		this.info = info;
 	}
 
 	public ElectronicTradingDTO(ElectronicTrading entity) {
@@ -32,7 +32,7 @@ public class ElectronicTradingDTO implements Serializable {
 		this.tradeNumber = entity.getTradeNumber();
 		this.organ = entity.getOrgan();
 		this.instant = entity.getInstant();
-		this.object = entity.getObject();
+		this.info = entity.getInfo();
 
 	}
 
@@ -68,12 +68,12 @@ public class ElectronicTradingDTO implements Serializable {
 		this.instant = instant;
 	}
 
-	public String getObject() {
-		return object;
+	public String getInfo() {
+		return info;
 	}
 
-	public void setObject(String object) {
-		this.object = object;
+	public void setInfo(String info) {
+		this.info = info;
 	}
 
 }

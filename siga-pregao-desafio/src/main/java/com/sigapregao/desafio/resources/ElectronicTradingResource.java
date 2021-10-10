@@ -1,6 +1,7 @@
 package com.sigapregao.desafio.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,8 @@ public class ElectronicTradingResource {
 	@Autowired
 	private ElectronicTradingService service;
 
+	// private static JSONObject jObject = null;
+
 	@GetMapping
 	public ResponseEntity<Page<ElectronicTradingDTO>> findAll(Pageable pageable) {
 
@@ -31,8 +34,12 @@ public class ElectronicTradingResource {
 	}
 
 	@PostMapping(value = "/search")
-	public void insert(@RequestBody String search) throws Exception {
-		service.getSearch(search);
+	public ResponseEntity<List<ElectronicTradingDTO>> insert(@RequestBody String search) throws Exception {
+		// jObject = new JSONObject(search);
+		// JSONObject geoObject = jObject.getJSONObject("geodata");
+		//List<ElectronicTradingDTO> dto = new ArrayList<>();
+		List<ElectronicTradingDTO> list = service.getSearch(search);
+		return ResponseEntity.ok().body(list);
 	}
 
 	@PostMapping

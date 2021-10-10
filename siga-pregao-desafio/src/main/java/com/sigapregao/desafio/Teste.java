@@ -3,14 +3,6 @@ package com.sigapregao.desafio;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
 /**
  * POST example
  * 
@@ -19,9 +11,9 @@ import org.jsoup.nodes.Document;
  */
 public class Teste {
 
-    private final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:65.0) Gecko/20100101 Firefox/65.0";
+   // private final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:65.0) Gecko/20100101 Firefox/65.0";
 
-    private final String urlPost = "https://www.huawei.com/en/accounts/PersonalPost";
+    //private final String urlPost = "https://www.huawei.com/en/accounts/PersonalPost";
 
     // main class
     public static void main(String[] args) throws Exception {
@@ -37,6 +29,6 @@ public class Teste {
     postData.put("cmd", "login");
     postData.put("password", "yyyyy");
 
-    Document doc = Jsoup.connect(urlPost).ignoreContentType(true).userAgent(USER_AGENT).data(postData).post();
+    //Document doc = Jsoup.connect(urlPost).ignoreContentType(true).userAgent(USER_AGENT).data(postData).post();
     }
 }

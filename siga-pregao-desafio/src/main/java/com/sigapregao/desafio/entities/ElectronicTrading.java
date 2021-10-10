@@ -23,18 +23,18 @@ public class ElectronicTrading implements Serializable {
 	private String organ;
 	private Instant instant;
 	private String tradeNumber;
-	@Column(columnDefinition = "TEXT", name="obj")
-	private String object;
+	@Column(columnDefinition = "TEXT")
+	private String info;
 
 	public ElectronicTrading() {
 	}
 
-	public ElectronicTrading(Long id, String organ, Instant instant, String tradeNumber, String object) {
+	public ElectronicTrading(Long id, String organ, Instant instant, String tradeNumber, String info) {
 		this.id = id;
 		this.organ = organ;
 		this.instant = instant;
 		this.tradeNumber = tradeNumber;
-		this.object = object;
+		this.info = info;
 
 	}
 
@@ -70,12 +70,12 @@ public class ElectronicTrading implements Serializable {
 		this.instant = instant;
 	}
 
-	public String getObject() {
-		return object;
+	public String getInfo() {
+		return info;
 	}
 
-	public void setObject(String object) {
-		this.object = object;
+	public void setInfo(String info) {
+		this.info = info;
 	}
 
 	@Override
@@ -102,26 +102,5 @@ public class ElectronicTrading implements Serializable {
 			return false;
 		return true;
 	}
-	/*
-	 * 
-	 * CREATE TABLE IF NOT EXISTS public.tb_electronic_trading
-	(
-	    id id_seq smallint NOT NULL DEFAULT nextval('id_seq') NOT NULL,
-	    organ text COLLATE pg_catalog."default" NOT NULL,
-	    instant date NOT NULL,
-	    trade_number text COLLATE pg_catalog."default",
-	    obj text COLLATE pg_catalog."default" NOT NULL,
-	    CONSTRAINT tb_electronic_trading_pkey PRIMARY KEY (id)
-	)
-
-	TABLESPACE pg_default;
-
-	ALTER TABLE public.tb_electronic_trading
-	    OWNER to postgres;
-	 * 
-	 * 
-	 */
 
 }
-
-
