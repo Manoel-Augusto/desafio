@@ -31,51 +31,61 @@ public class ElectronicTradingService {
 	@Autowired
 	private ElectronicTradingRepository repository;
 
+	// Metodo para realizar scraping
 	@Transactional
 	public List<ElectronicTradingDTO> getSearch(String search) throws Exception {
 
 		System.setProperty("webdriver.chrome.driver",
 				"C:/Users/manoe/Desktop/desafio/siga-pregao-desafio/src/main/java/driver/chromedriver.exe");
-
+		// Instância e configuração do WebDriver
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--headless");
 		WebDriver driver = new ChromeDriver(options);
 
+		// Scraping
 		driver.manage().timeouts().implicitlyWait(600, TimeUnit.MICROSECONDS);
 		driver.get(url);
 		driver.findElement(By.id("txtObjeto")).sendKeys(search);
 		driver.findElement(By.id("ok")).click();
+		String stringHtml = driver.getPageSource();
+		driver.quit();
 
-		String htm = driver.getPageSource();
-		Document doc = Jsoup.parse(htm);
+		Document doc = Jsoup.parse(stringHtml);
 
 		List<Element> forms = doc.getElementsByTag("form");
 		List<ElectronicTradingDTO> dto = new ArrayList<>();
 
+		// Foreach para percorrer os elementos da lista de (Forms) extraindo os textos
 		for (Element element : forms) {
 
 			List<Element> b = element.getElementsByTag("b");
 			Element tbody = element.getElementsByTag("tbody").first();
 			List<Element> texto = tbody.getElementsByClass("tex3");
-			ElectronicTrading list = new ElectronicTrading();
+			ElectronicTrading electronicTrading = new ElectronicTrading();
 
-			list.setTradeNumber(b.get(1).text());
-			list.setInstant(Instant.now());
-			list.setOrgan(b.get(0).text());
-			list.setInfo(texto.get(0).text());
-			dto.add(new ElectronicTradingDTO(list));
-			repository.save(list);
+			// Seta os atributos no objeto retorna uma lista para o Resource e salva os
+			// dados no banco
+			electronicTrading.setTradeNumber(b.get(1).text());
+			electronicTrading.setInstant(Instant.now());
+			electronicTrading.setOrgan(b.get(0).text());
+			electronicTrading.setInfo(texto.get(0).text());
+			dto.add(new ElectronicTradingDTO(electronicTrading));
+			repository.save(electronicTrading);
 
 		}
 
-		driver.quit();
 		return dto;
 	}
 
+	/*
+	 * Metodo para recuperar os dados dos pregões salvo no banco retorna de forma
+	 * ordenada do mais rescente para o mais antigo baseado no atributo instant que é o horário no
+	 * qual foi persistido no banco.
+	 */
 	@Transactional(readOnly = true)
 	public Page<ElectronicTradingDTO> findAllPaged(Pageable pageable) {
-		Page<ElectronicTrading> list = repository
+		Page<ElectronicTrading> electronicTrading = repository
 				.findAll(PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "instant")));
-		return list.map(x -> new ElectronicTradingDTO(x));
+		return electronicTrading.map(x -> new ElectronicTradingDTO(x));
 	}
 }
