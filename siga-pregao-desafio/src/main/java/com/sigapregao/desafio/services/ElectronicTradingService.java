@@ -10,7 +10,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +36,13 @@ public class ElectronicTradingService {
 
 		System.setProperty("webdriver.chrome.driver",
 				"C:/Users/manoe/Desktop/desafio/siga-pregao-desafio/src/main/java/driver/chromedriver.exe");
+
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--headless");
 		WebDriver driver = new ChromeDriver(options);
 
 		driver.manage().timeouts().implicitlyWait(600, TimeUnit.MICROSECONDS);
-
 		driver.get(url);
-
 		driver.findElement(By.id("txtObjeto")).sendKeys(search);
 		driver.findElement(By.id("ok")).click();
 
@@ -57,10 +55,8 @@ public class ElectronicTradingService {
 		for (Element element : forms) {
 
 			List<Element> b = element.getElementsByTag("b");
-
 			Element tbody = element.getElementsByTag("tbody").first();
 			List<Element> texto = tbody.getElementsByClass("tex3");
-
 			ElectronicTrading list = new ElectronicTrading();
 
 			list.setTradeNumber(b.get(1).text());
@@ -79,8 +75,7 @@ public class ElectronicTradingService {
 	@Transactional(readOnly = true)
 	public Page<ElectronicTradingDTO> findAllPaged(Pageable pageable) {
 		Page<ElectronicTrading> list = repository
-				.findAll(PageRequest.of(0, 12, Sort.by(Sort.Direction.ASC, "instant")));
-
+				.findAll(PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "instant")));
 		return list.map(x -> new ElectronicTradingDTO(x));
 	}
 }

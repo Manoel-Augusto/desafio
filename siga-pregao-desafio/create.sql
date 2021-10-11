@@ -110,3 +110,15 @@ create table tb_electronic_trading (id  bigserial not null, info TEXT, instant t
 create table tb_electronic_trading (id  bigserial not null, info TEXT, instant timestamp, organ varchar(255), trade_number varchar(255), primary key (id));
 create table tb_electronic_trading (id  bigserial not null, info TEXT, instant timestamp, organ varchar(255), trade_number varchar(255), primary key (id));
 create table tb_electronic_trading (id  bigserial not null, info TEXT, instant timestamp, organ varchar(255), trade_number varchar(255), primary key (id));
+create table tb_electronic_trading (id  bigserial not null, info TEXT, instant timestamp, organ varchar(255), trade_number varchar(255), primary key (id));
+create table tb_electronic_trading (id  bigserial not null, info TEXT, instant timestamp, organ varchar(255), trade_number varchar(255), primary key (id));
+create table tb_electronic_trading (id  bigserial not null, info TEXT, instant timestamp, organ varchar(255), trade_number varchar(255), primary key (id));
+create table tb_electronic_trading (id  bigserial not null, info TEXT, instant timestamp, organ varchar(255), trade_number varchar(255), primary key (id));
+create table tb_electronic_trading (id  bigserial not null, info TEXT, instant timestamp, organ varchar(255), trade_number varchar(255), primary key (id));
+create table tb_electronic_trading (id  bigserial not null, info TEXT, instant timestamp, organ varchar(255), trade_number varchar(255), primary key (id));
+create table tb_electronic_trading (id  bigserial not null, info TEXT, instant timestamp, organ varchar(255), trade_number varchar(255), primary key (id));
+create table tb_electronic_trading (id  bigserial not null, info TEXT, instant timestamp, organ varchar(255), trade_number varchar(255), primary key (id));
+create table tb_electronic_trading (id  bigserial not null, info TEXT, instant timestamp, organ varchar(255), trade_number varchar(255), primary key (id));
+create table tb_electronic_trading (id  bigserial not null, info TEXT, instant timestamp, organ varchar(255), trade_number varchar(255), primary key (id));
+create table tb_electronic_trading (id  bigserial not null, info TEXT, instant timestamp, organ varchar(255), trade_number varchar(255), primary key (id));
+create table tb_electronic_trading (id  bigserial not null, info TEXT, instant timestamp, organ varchar(255), trade_number varchar(255), primary key (id));
